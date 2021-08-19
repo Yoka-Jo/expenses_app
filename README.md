@@ -4,7 +4,7 @@ An application that helps yout manage your expenses.
 
 # Screenshots
 <p align="center">
-  <img src='expPics/exp1.png'width="400" /> 
+  <img src='expPics/exp1.png'width="900" /> 
   <img src='expPics/exp2.png'width="400" /> 
   <img src='expPics/exp3.png'width="400" /> 
   <img src='expPics/exp4.png'width="400" /> 
