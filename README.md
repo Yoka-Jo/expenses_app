@@ -13,10 +13,10 @@ An application that helps yout manage your expenses.
 
 </p>
 
-#Features
-Uses sqflite as a database.
-Gives you a better look of your expenses in each week.
-You can delete one or all products.
+# Features
+-Uses sqflite as a database.
+-Gives you a better look of your expenses in each week.
+-You can delete one or all products.
 
 ## Getting Started
 
