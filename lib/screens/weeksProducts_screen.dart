@@ -28,7 +28,7 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: Duration(seconds: 1),
-        content: Text("Product deleted Successfully"),
+        content: Text("Product deleted Successfully" ,textAlign: TextAlign.center,),
         backgroundColor: Colors.red,
       ));
       updateListView();
@@ -138,7 +138,9 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10.0,),
+                              SizedBox(
+                                height: 10.0,
+                              ),
                               Row(
                                 children: [
                                   Text(
@@ -157,7 +159,9 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10.0,),
+                              SizedBox(
+                                height: 10.0,
+                              ),
                               Row(
                                 children: [
                                   Text(
@@ -176,7 +180,9 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10.0,),
+                              SizedBox(
+                                height: 10.0,
+                              ),
                               Row(
                                 children: [
                                   Text(
@@ -198,7 +204,7 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
                             ],
                           ),
                           SizedBox(
-                            width: width * 20,
+                            width: width * 15,
                           ),
                           GestureDetector(
                             child: Icon(
@@ -222,7 +228,7 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   actions: [
-                                    FlatButton(
+                                    TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
@@ -230,7 +236,7 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
                                             style: TextStyle(
                                                 color: Color(0xffF28080),
                                                 fontWeight: FontWeight.bold))),
-                                    FlatButton(
+                                    TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                           deleteProduct(

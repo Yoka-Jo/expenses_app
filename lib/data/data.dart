@@ -7,8 +7,7 @@ class ProductData {
   String _week;
   ProductData([this._productName, this._price, this._number, this._date, this._week]);
 
-//  ProductData.withId(this._id, this._productName, this._price, this._number,
-//      this._date , this._week);
+
 
   int get id => _id;
 

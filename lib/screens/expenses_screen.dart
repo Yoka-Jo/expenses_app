@@ -149,8 +149,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                   ],
                 ),
               ),
-              RaisedButton(
-                color: Colors.red.shade900,
+              ElevatedButton(
+                style: ButtonStyle(backgroundColor:MaterialStateProperty.all<Color>(Colors.red.shade900), ),
                 child: Text('Delete All Products' , style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),),
                 onPressed:() {
                   showDialog(
@@ -166,12 +166,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                         style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),
                       ),
                       actions: [
-                        FlatButton(
+                        TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
                             child: Text('No' ,style: TextStyle(color: Color(0xffF28080) , fontWeight: FontWeight.bold),)),
-                        FlatButton(
+                        TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                               dbHelper

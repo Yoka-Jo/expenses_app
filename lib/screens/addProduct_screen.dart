@@ -41,19 +41,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
     super.dispose();
   }
 
-  void updateproductName() {
-    widget.productData.productName = productNameController.text;
-  }
 
-  void updateproductPrice() {
-    widget.productData.price = double.parse(productPriceController.text);
-  }
-
-  void updateproductNumber() {
-    widget.productData.number = int.parse(productNumberController.text);
-  }
 
   void _save() async {
+    if(productNameController.text.isNotEmpty && productPriceController.text.isNotEmpty && productNumberController.text.isNotEmpty){
+    widget.productData.productName = productNameController.text;
+    widget.productData.price = double.parse(productPriceController.text);
+    widget.productData.number = int.parse(productNumberController.text);
+
     Navigator.of(context).pop(true);
     widget.productData.date =
         DateFormat.yMMMd().format(DateTime.now()).toString();
@@ -63,6 +58,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
     if (result == 0) {
       showAlertDialog('Status', 'Problem svaing Product');
     }
+  }
+  else{
+    return;
+  }
   }
 
   void showAlertDialog(String title, String message) {
@@ -122,10 +121,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         child: Container(
                           width: width * 90,
                           child: TextField(
-                            onChanged: (value) {
-                              updateproductName();
-                            },
-                            controller: productNameController,
+                             controller: productNameController,
                             style: TextStyle(
                                 height: .9, color: Colors.white, fontSize: 20),
                             decoration: InputDecoration(
@@ -154,10 +150,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         padding: EdgeInsets.symmetric(horizontal: height * 2),
                         child: Container(
                           width: width * 90,
-                          child: TextField(
-                            onChanged: (value) {
-                              updateproductPrice();
-                            },
+                          child: TextField( 
                             controller: productPriceController,
                             keyboardType: TextInputType.number,
                             style: TextStyle(
@@ -188,16 +181,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         padding: EdgeInsets.symmetric(horizontal: height * 2),
                         child: Container(
                           width: width * 90,
-                          child: TextField(
-                            onChanged: (value) {
-                              updateproductNumber();
-                            },
+                          child: TextField( 
                             controller: productNumberController,
                             keyboardType: TextInputType.number,
                             style: TextStyle(
                                 height: .9, color: Colors.white, fontSize: 20),
                             decoration: InputDecoration(
-                              hintText: 'Number',
+                              hintText: 'How Many ?',
                               hintStyle: TextStyle(fontSize: 15),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -223,7 +213,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
                 Container(
                     margin: EdgeInsets.only(left: _isLandScape ? width * 5 : 0),
-                    child: AddButton(_save))
+                    child: AddButton(_save)),
+                      SizedBox(height: 20.0,)
+
               ],
             ),
           ),
