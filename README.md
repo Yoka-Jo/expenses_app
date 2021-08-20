@@ -1,6 +1,22 @@
-# test2_app
+# ExpensesApp
 
-A new Flutter application.
+An application that helps yout manage your expenses.
+
+# Screenshots
+<p align="center">
+  <img src='expPics/exp1.png'height="500"/> 
+  <img src='expPics/exp2.png'height="500"/> 
+  <img src='expPics/exp3.png'height="500"/> 
+  <img src='expPics/exp4.png'height="500"/> 
+  <img src='expPics/exp5.png'height="500"/> 
+ 
+
+</p>
+
+# Features
+- Uses sqflite as a database.
+- Gives you a better look of your expenses in each week.
+- You can delete one or all products.
 
 ## Getting Started
 
