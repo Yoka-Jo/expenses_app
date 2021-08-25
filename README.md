@@ -6,11 +6,11 @@ An application that helps yout manage your expenses.
 
 <p align="center"><img src='expPics/expGif.gif'height="500"/></p>
 <p align="center">
-  <img src='expPics/exp1.png'height="500"/> 
-  <img src='expPics/exp2.png'height="500"/> 
-  <img src='expPics/exp3.png'height="500"/> 
-  <img src='expPics/exp4.png'height="500"/> 
-  <img src='expPics/exp5.png'height="500"/> 
+  <img src='expPics/exp1.png'width="42%"/> 
+  <img src='expPics/exp2.png'width="42%"/> 
+  <img src='expPics/exp3.png'width="42%"/> 
+  <img src='expPics/exp4.png'width="42%"/> 
+  <img src='expPics/exp5.png'width="42%"/> 
 </p>
 
 # Features
