@@ -1,6 +1,6 @@
 # ExpensesApp
 
-An application that helps yout manage your expenses.
+An application that helps you manage your expenses.
 
 # Screenshots
 
