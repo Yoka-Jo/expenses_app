@@ -139,20 +139,19 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 child: GridView(
                   padding: EdgeInsets.only(bottom: _isLandScape ? 40 : 0),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    childAspectRatio: 1,
                     maxCrossAxisExtent: _isLandScape
                         ? SizeConfig2.safeBlockVerticalWithOutAppBar * 60
                         : SizeConfig2.safeBlockVerticalWithOutAppBar * 40,
                     mainAxisSpacing: 15,
                   ),
                   children: [
-                    ExtensesDetail('First Week', moneyCollection('First Week'),
+                    ExtensesDetails('First Week', moneyCollection('First Week'),
                         updateListView),
-                    ExtensesDetail('Second Week',
+                    ExtensesDetails('Second Week',
                         moneyCollection('Second Week'), updateListView),
-                    ExtensesDetail('Third Week', moneyCollection('Third Week'),
+                    ExtensesDetails('Third Week', moneyCollection('Third Week'),
                         updateListView),
-                    ExtensesDetail('Forth Week', moneyCollection('Forth Week'),
+                    ExtensesDetails('Forth Week', moneyCollection('Forth Week'),
                         updateListView),
                   ],
                 ),
@@ -219,12 +218,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   }
 }
 
-class ExtensesDetail extends StatelessWidget {
+class ExtensesDetails extends StatelessWidget {
   final String weekName;
   final String muchMoney;
   final Function reload;
 
-  const ExtensesDetail(this.weekName, this.muchMoney, this.reload);
+  const ExtensesDetails(this.weekName, this.muchMoney, this.reload);
 
   @override
   Widget build(BuildContext context) {
