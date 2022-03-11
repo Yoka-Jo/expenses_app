@@ -139,7 +139,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 child: GridView(
                   padding: EdgeInsets.only(bottom: _isLandScape ? 40 : 0),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    childAspectRatio: 1,
                     maxCrossAxisExtent: _isLandScape
                         ? SizeConfig2.safeBlockVerticalWithOutAppBar * 60
                         : SizeConfig2.safeBlockVerticalWithOutAppBar * 40,
