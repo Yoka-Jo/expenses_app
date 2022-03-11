@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import '../screenSize.dart';
 import './weeksProducts_screen.dart';
-import '../data/data.dart';
+import '../data/product.dart';
 import '../dbHelper/DBHelper.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ExpensesScreen extends StatefulWidget {
-
   @override
   _ExpensesScreenState createState() => _ExpensesScreenState();
 }
@@ -14,7 +13,7 @@ class ExpensesScreen extends StatefulWidget {
 class _ExpensesScreenState extends State<ExpensesScreen> {
   DbHelper dbHelper = DbHelper();
 
-  List<ProductData> productsList;
+  List<Product> productsList;
 
   int count = 0;
 
@@ -45,7 +44,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   void updateListView() {
     final Future<Database> dbFuture = dbHelper.createDatabase();
     dbFuture.then((database) {
-      Future<List<ProductData>> productListFuture = dbHelper.getProductList();
+      Future<List<Product>> productListFuture = dbHelper.getProductList();
       productListFuture.then((productList) {
         setState(() {
           productsList = productList;
@@ -87,10 +86,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
               ),
-              SizedBox(height: 30.0,),
+              SizedBox(
+                height: 30.0,
+              ),
               Container(
                 padding: EdgeInsets.all(10),
-                margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 40),
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
                 height: 150,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -99,30 +100,37 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 ),
                 child: Center(
                     child: Column(
-                      children: [
-                        Text('Your Expenses till now' , style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold , fontSize: 20),),
-                            SizedBox(height: 10.0,),
-                 Container(
-                    height: 90,
-                   width: 90,
-                   padding: EdgeInsets.all(1.5),
-                   decoration: BoxDecoration(
-                     color: Colors.white,
-                     shape: BoxShape.circle
-                   ),
-                   child: CircleAvatar(
-                     backgroundColor: Colors.black,
-                     maxRadius: 45,
-                            child: Text(
-                    '${allMoneyCollection() ?? '...'} \$',
-                    style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold , fontSize: 20),
-                ),
-                          ),
-                 ),
-                      ],
-                    )),
+                  children: [
+                    Text(
+                      'Your Expenses till now',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      height: 90,
+                      width: 90,
+                      padding: EdgeInsets.all(1.5),
+                      decoration: BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.black,
+                        maxRadius: 45,
+                        child: Text(
+                          '${allMoneyCollection() ?? '...'} \$',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
               ),
               SizedBox(
                 height: _isLandScape ? 10 : 10,
@@ -150,41 +158,59 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 ),
               ),
               ElevatedButton(
-                style: ButtonStyle(backgroundColor:MaterialStateProperty.all<Color>(Colors.red.shade900), ),
-                child: Text('Delete All Products' , style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),),
-                onPressed:() {
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      backgroundColor: Color(0xff7D1DFA),
-                      title: Center(
-                        child: Text('Are You Sure?',
-                            style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold)),
-                      ),
-                      content: Text(
-                        'You are about to delete all products.',
-                        style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),
-                      ),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('No' ,style: TextStyle(color: Color(0xffF28080) , fontWeight: FontWeight.bold),)),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              dbHelper
-                                 .cleanDatabase();
-                              updateListView();
-                            },
-                            child: Text('Yes' , style: TextStyle(color: Color(0xffF28080) , fontWeight: FontWeight.bold)))
-                      ],
-                    )
-                  );
-                }
-              ),
-              SizedBox(height: SizeConfig2.safeBlockVerticalWithOutAppBar * 5,)
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red.shade900),
+                  ),
+                  child: Text(
+                    'Delete All Products',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                              backgroundColor: Color(0xff7D1DFA),
+                              title: Center(
+                                child: Text('Are You Sure?',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              content: Text(
+                                'You are about to delete all products.',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Color(0xffF28080),
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      dbHelper.cleanDatabase();
+                                      updateListView();
+                                    },
+                                    child: Text('Yes',
+                                        style: TextStyle(
+                                            color: Color(0xffF28080),
+                                            fontWeight: FontWeight.bold)))
+                              ],
+                            ));
+                  }),
+              SizedBox(
+                height: SizeConfig2.safeBlockVerticalWithOutAppBar * 5,
+              )
             ],
           ),
         ),
@@ -231,8 +257,10 @@ class ExtensesDetail extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               muchMoney == '0.0' ? 'No Products Yet' : '$muchMoney \$',
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold , fontSize: muchMoney == '0.0' ? 14: 20),
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: muchMoney == '0.0' ? 14 : 20),
             ),
             SizedBox(height: 10),
             Container(

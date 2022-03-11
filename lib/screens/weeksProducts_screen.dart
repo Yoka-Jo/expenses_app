@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './addProduct_screen.dart';
-import '../data/data.dart';
+import '../data/product.dart';
 import '../dbHelper/DBHelper.dart';
 import 'package:sqflite/sqflite.dart';
 import '../screenSize.dart';
@@ -18,17 +18,20 @@ class WeekProductsScreen extends StatefulWidget {
 class _WeekProductsScreenState extends State<WeekProductsScreen> {
   DbHelper dbHelper = DbHelper();
 
-  List<ProductData> productsList;
+  List<Product> productsList;
 
   int count = 0;
 
-  void deleteProduct(BuildContext context, ProductData data) async {
+  void deleteProduct(BuildContext context, Product data) async {
     int result = await dbHelper.deleteProduct(data.id);
     if (result != 0) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: Duration(seconds: 1),
-        content: Text("Product deleted Successfully" ,textAlign: TextAlign.center,),
+        content: Text(
+          "Product deleted Successfully",
+          textAlign: TextAlign.center,
+        ),
         backgroundColor: Colors.red,
       ));
       updateListView();
@@ -38,7 +41,7 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
   void updateListView() {
     final Future<Database> dbFuture = dbHelper.createDatabase();
     dbFuture.then((database) {
-      Future<List<ProductData>> productListFuture = dbHelper.getProductList();
+      Future<List<Product>> productListFuture = dbHelper.getProductList();
       productListFuture.then((productList) {
         setState(() {
           productsList = productList;
@@ -288,7 +291,7 @@ class _WeekProductsScreenState extends State<WeekProductsScreen> {
               onPressed: () async {
                 final reload = await Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return AddProductScreen(ProductData(), widget.week);
+                      return AddProductScreen(Product(), widget.week);
                     })) ??
                     true;
                 if (reload) {

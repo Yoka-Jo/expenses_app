@@ -1,13 +1,12 @@
-class ProductData {
+class Product {
   int _id;
   String _productName;
   double _price;
   int _number;
   String _date;
   String _week;
-  ProductData([this._productName, this._price, this._number, this._date, this._week]);
-
-
+  Product(
+      [this._productName, this._price, this._number, this._date, this._week]);
 
   int get id => _id;
 
@@ -36,7 +35,6 @@ class ProductData {
     this._price = price;
   }
 
-
   set number(int newDate) {
     this._number = newDate;
   }
@@ -57,7 +55,7 @@ class ProductData {
   }
 
   // Extract a Note object from a Map object
-  ProductData.fromMapObject(Map<String, dynamic> map) {
+  Product.fromMapObject(Map<String, dynamic> map) {
     this._id = map['id'];
     this._productName = map['title'];
     this._price = map['price'];

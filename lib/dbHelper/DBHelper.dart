@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import '../data/data.dart';
+import '../data/product.dart';
 
 class DbHelper {
 //  static final DbHelper _instance = DbHelper.internal();
@@ -25,7 +25,7 @@ class DbHelper {
     return _db;
   }
 
-  Future<int> createProduct(ProductData data) async {
+  Future<int> createProduct(Product data) async {
     Database db = await createDatabase();
     //db.rawInsert('insert into courses')
     return db.insert('extenses', data.toMap());
@@ -42,16 +42,15 @@ class DbHelper {
     return db.delete('extenses', where: 'id = ?', whereArgs: [id]);
   }
 
-
   Future<void> cleanDatabase() async {
-    try{
+    try {
       final db = await createDatabase();
       await db.transaction((txn) async {
         var batch = txn.batch();
         batch.delete('extenses');
         await batch.commit();
       });
-    } catch(error){
+    } catch (error) {
       throw Exception('DbBase.cleanDatabase: ' + error.toString());
     }
   }
@@ -64,12 +63,12 @@ class DbHelper {
 //    return result;
 //  }
 
-  Future<List<ProductData>> getProductList() async{
+  Future<List<Product>> getProductList() async {
     var productMapList = await allProducts();
     int count = productMapList.length;
-    List<ProductData> productList = [];
+    List<Product> productList = [];
     for (int i = 0; i < count; i++) {
-      productList.add(ProductData.fromMapObject(productMapList[i]));
+      productList.add(Product.fromMapObject(productMapList[i]));
     }
     return productList;
   }

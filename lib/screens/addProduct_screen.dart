@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import '../widget/addButton.dart';
 import '../screenSize.dart';
-import '../data/data.dart';
+import '../data/product.dart';
 import '../dbHelper/DBHelper.dart';
 import 'package:intl/intl.dart';
 
+import '../widgets/addButton.dart';
+
 class AddProductScreen extends StatefulWidget {
   static const routeName = '/AddProductScreen';
-  final ProductData productData;
+  final Product productData;
   final String week;
 
   AddProductScreen(this.productData, this.week);
@@ -41,27 +42,26 @@ class _AddProductScreenState extends State<AddProductScreen> {
     super.dispose();
   }
 
-
-
   void _save() async {
-    if(productNameController.text.isNotEmpty && productPriceController.text.isNotEmpty && productNumberController.text.isNotEmpty){
-    widget.productData.productName = productNameController.text;
-    widget.productData.price = double.parse(productPriceController.text);
-    widget.productData.number = int.parse(productNumberController.text);
+    if (productNameController.text.isNotEmpty &&
+        productPriceController.text.isNotEmpty &&
+        productNumberController.text.isNotEmpty) {
+      widget.productData.productName = productNameController.text;
+      widget.productData.price = double.parse(productPriceController.text);
+      widget.productData.number = int.parse(productNumberController.text);
 
-    Navigator.of(context).pop(true);
-    widget.productData.date =
-        DateFormat.yMMMd().format(DateTime.now()).toString();
-    widget.productData.week = widget.week;
-    int result = await dbHelper.createProduct(widget.productData);
+      Navigator.of(context).pop(true);
+      widget.productData.date =
+          DateFormat.yMMMd().format(DateTime.now()).toString();
+      widget.productData.week = widget.week;
+      int result = await dbHelper.createProduct(widget.productData);
 
-    if (result == 0) {
-      showAlertDialog('Status', 'Problem svaing Product');
+      if (result == 0) {
+        showAlertDialog('Status', 'Problem svaing Product');
+      }
+    } else {
+      return;
     }
-  }
-  else{
-    return;
-  }
   }
 
   void showAlertDialog(String title, String message) {
@@ -121,7 +121,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         child: Container(
                           width: width * 90,
                           child: TextField(
-                             controller: productNameController,
+                            controller: productNameController,
                             style: TextStyle(
                                 height: .9, color: Colors.white, fontSize: 20),
                             decoration: InputDecoration(
@@ -150,7 +150,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         padding: EdgeInsets.symmetric(horizontal: height * 2),
                         child: Container(
                           width: width * 90,
-                          child: TextField( 
+                          child: TextField(
                             controller: productPriceController,
                             keyboardType: TextInputType.number,
                             style: TextStyle(
@@ -181,7 +181,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         padding: EdgeInsets.symmetric(horizontal: height * 2),
                         child: Container(
                           width: width * 90,
-                          child: TextField( 
+                          child: TextField(
                             controller: productNumberController,
                             keyboardType: TextInputType.number,
                             style: TextStyle(
@@ -214,8 +214,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 Container(
                     margin: EdgeInsets.only(left: _isLandScape ? width * 5 : 0),
                     child: AddButton(_save)),
-                      SizedBox(height: 20.0,)
-
+                SizedBox(
+                  height: 20.0,
+                )
               ],
             ),
           ),
